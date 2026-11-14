@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Jaakiekkoseura</title>
+</head>
+
+<body>
+    <h1>Jaakiekkoseura</h1>
+
+  {% if session.username %}
+  <p>
+    Olet kirjautunut nimellä {{ session.username }}
+  </p>
+  {% endif %}
+
+  <p>
+    <a href="/login">Kirjaudu sisään</a>
+    <a href="/register">Luo Tunnus</a>
+    <a href="/logout">Kirjaudu ulos</a>
+  </p>
+</body>
+
+</html>
