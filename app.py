@@ -15,6 +15,16 @@ def index():
     all_announcements = announcements.get_announcements()
     return render_template("index.html", announcements=all_announcements)
 
+@app.route("/find_announcement")
+def find_announcement():
+    query = request.args.get("query")
+    if query:
+        results = announcements.find_announcements(query)
+    if not query:
+        query = ""
+        results = []
+    return render_template("find_announcement.html", query=query, results=results)
+
 @app.route("/page/<int:announcement_id>")
 def show_announcement(announcement_id):
     announcement = announcements.get_announcement(announcement_id)

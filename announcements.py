@@ -25,3 +25,11 @@ def remove_announcement(announcement_id):
 
     db.execute(sql, [announcement_id])
 
+def find_announcements(query):
+    sql = """SELECT id, title
+             FROM announcements
+             WHERE title LIKE ? OR description LIKE ?
+             ORDER BY id DESC"""
+    like = "%" + query + "%"
+    return db.query(sql, [like, like])
+
