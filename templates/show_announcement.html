@@ -5,20 +5,24 @@
   <title>{{ announcement.title }}</title>
 </head>
 <body>
-    <h1>{{ announcement.title }}</h1>
-    <p>
-      {{ announcement.description }} 
-    </p>
-    <p>
-        Tarvittava pelaajien vähimmäismäärä: {{ announcement.vähimmäismäärä }} KPL
-    </p>
-    <p>
-        Ilmoittaja: {{ announcement.username }}
-    </p>
-    <p>
-       <a href="/">Takaisin etusivulle</a>
-    </p>
-
+  <h1>{{ announcement.title }}</h1>
+  {% if session.user_id == announcement.user_id %}
+  <p>
+    <a href="/edit_announcement/{{ announcement.id }}">Muokkaa ilmoitusta</a>
+  </p>
+  {% endif %}
+  <p>
+    {{ announcement.description }}
+  </p>
+  <p>
+    Tarvittava pelaajien vähimmäismäärä: {{ announcement.vähimmäismäärä }} KPL
+  </p>
+  <p>
+    Ilmoittaja: {{ announcement.username }}
+  </p>
+  <p>
+    <a href="/">Takaisin etusivulle</a>
+  </p>
 </body>
 
 </html>

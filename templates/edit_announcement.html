@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Muokkaa ilmoitusta</title>
+</head>
+<body>
+  <h1>Muokkaa ilmoitusta</h1>
+  <form action="/update_announcement" method="post">
+    <p>
+      Otsikko: <br />
+      <textarea rows="4" cols="20" name="title">{{ announcement.title }}</textarea>
+    </p>
+    <p>
+      Kuvaus: <br />
+      <textarea rows="10" cols="60" name="description">{{ announcement.description }}</textarea>
+    </p>
+    <p>
+      Pelaajien vähimmäismäärä: <br />
+      <input type="text" name="vähimmäismäärä" size="2" maxlength="2" value="{{ announcement.vähimmäismäärä }}" /> KPL
+    </p>
+    <input type="hidden" name="announcement_id" value="{{ announcement.id }}" />
+    <input type="submit" value="Muokkaa ilmoitusta" />
+  </form>
+</body>
+
+</html>

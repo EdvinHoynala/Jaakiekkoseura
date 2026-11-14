@@ -35,6 +35,22 @@ def create_announcement():
 
     return redirect("/")
 
+@app.route("/edit_announcement/<int:announcement_id>")
+def edit_announcement(announcement_id):
+    announcement = announcements.get_announcement(announcement_id)
+    return render_template("edit_announcement.html", announcement=announcement)
+
+@app.route("/update_announcement", methods=["POST"])
+def update_announcement():
+    announcement_id = request.form["announcement_id"]
+    title = request.form["title"]
+    description = request.form["description"]
+    vähimmäismäärä = request.form["vähimmäismäärä"]
+
+    announcements.update_announcement(announcement_id, title, description, vähimmäismäärä)
+
+    return redirect("/page/" + str(announcement_id))
+
 
 @app.route("/register")
 def register():
