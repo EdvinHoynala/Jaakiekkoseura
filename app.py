@@ -12,7 +12,13 @@ app.secret_key = config.secret_key
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    all_announcements = announcements.get_announcements()
+    return render_template("index.html", announcements=all_announcements)
+
+@app.route("/page/<int:announcement_id>")
+def show_announcement(announcement_id):
+    announcement = announcements.get_announcement(announcement_id)
+    return render_template("show_announcement.html", announcement=announcement)
 
 @app.route("/new_announcement")
 def new_item():

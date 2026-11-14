@@ -23,6 +23,13 @@
    <p>
     <a href="/new_announcement">Uusi ilmoitus</a>
    </p>
+
+   <h2>Ilmoitukset</h2>
+<ul>
+  {% for announcement in announcements %}
+    <li><a href="/page/{{ announcement.id }}">{{ announcement.title }}</a></li>
+  {% endfor %}
+</ul>
 </body>
 
 </html>
