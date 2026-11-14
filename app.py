@@ -4,6 +4,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 import config
 import db
 import sqlite3
+import announcements
 
 app = Flask(__name__)
 app.secret_key = config.secret_key
@@ -24,8 +25,8 @@ def create_announcement():
     vähimmäismäärä = request.form["vähimmäismäärä"]
     user_id = session["user_id"]
 
-    sql = "INSERT INTO announcements (title, description, vähimmäismäärä, user_id) VALUES (?, ?, ?, ?)"
-    db.execute(sql, [title, description, vähimmäismäärä, user_id])
+    announcements.add_announcement(title, description, vähimmäismäärä, user_id)
+
     return redirect("/")
 
 
