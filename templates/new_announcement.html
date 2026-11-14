@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Uusi ilmoitus</title>
+</head>
+<body>
+    <h1>Uusi ilmoitus</h1>
+  <form action="/create_announcement" method="post">
+    <p>
+      Otsikko: <br />
+      <textarea rows="4" cols="20" name="title"></textarea>
+    </p>
+    <p>
+      Kuvaus: <br />
+      <textarea rows="10" cols="60" name="description"></textarea>
+    </p>
+    <p>
+      Pelaajien vähimmäismäärä: <br />
+      <input type="text" name="vähimmäismäärä" size="2" maxlength="2" /> KPL
+    </p>
+    </p>
+    <input type="submit" value="Luo ilmoitus" />
+  </form>
+</body>
+
+</html>
