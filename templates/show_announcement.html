@@ -9,6 +9,7 @@
   {% if session.user_id == announcement.user_id %}
   <p>
     <a href="/edit_announcement/{{ announcement.id }}">Muokkaa ilmoitusta</a>
+    <a href="/remove_announcement/{{ announcement.id }}">Poista ilmoitus</a>
   </p>
   {% endif %}
   <p>

@@ -19,3 +19,9 @@ def update_announcement(announcement_id, title, description, vähimmäismäärä
     WHERE id = ?"""
 
     db.execute(sql, [title, description, vähimmäismäärä, announcement_id])
+
+def remove_announcement(announcement_id):
+    sql = "DELETE FROM announcements WHERE id = ?"
+
+    db.execute(sql, [announcement_id])
+

@@ -51,6 +51,20 @@ def update_announcement():
 
     return redirect("/page/" + str(announcement_id))
 
+@app.route("/remove_announcement/<int:announcement_id>", methods=["GET", "POST"])
+def remove_announcement(announcement_id):
+    if request.method == "GET":
+        announcement = announcements.get_announcement(announcement_id)
+        return render_template("remove_announcement.html", announcement=announcement)
+
+    if request.method == "POST":
+        if "remove" in request.form:
+            announcements.remove_announcement(announcement_id)
+            return redirect("/")
+        else:
+            return redirect("/page/" + str(announcement_id))
+
+
 
 @app.route("/register")
 def register():
