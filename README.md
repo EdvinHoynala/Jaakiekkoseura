@@ -43,5 +43,5 @@
    ```
 
 5. **Avaa sovellus selaimessa:**
-   Siirry osoitteeseen `http://127.0.0.1:5000`, luo uusi käyttäjätunnus ja kirjaudu sisään.
+   Siirry osoitteeseen `http://127.0.0.1:5000`, luo uusi käyttäjätunnus ja kirjaudu sisään. Luo ilmoitus, poista ilmoitus, muokkaa ilmoitusta, hae ilmoitusta.
 
