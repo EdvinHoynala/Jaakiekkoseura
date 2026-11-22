@@ -80,7 +80,11 @@ def update_announcement():
     if announcement["user_id"] != session["user_id"]:
         abort(403)
     title = request.form["title"]
+    if not title or len(title) > 50:
+        abort(403)
     description = request.form["description"]
+    if not description or len(description) > 1000:
+        abort(403)
     vähimmäismäärä = request.form["vähimmäismäärä"]
 
     announcements.update_announcement(announcement_id, title, description, vähimmäismäärä)

@@ -9,11 +9,11 @@
   <form action="/update_announcement" method="post">
     <p>
       Otsikko: <br />
-      <textarea rows="4" cols="20" name="title">{{ announcement.title }}</textarea>
+      <textarea rows="4" cols="20" name="title" maxlength="50" required>{{ announcement.title }}</textarea>
     </p>
     <p>
       Kuvaus: <br />
-      <textarea rows="10" cols="60" name="description">{{ announcement.description }}</textarea>
+      <textarea rows="10" cols="60" name="description" maxlength="1000" required>{{ announcement.description }}</textarea>
     </p>
     <p>
       Pelaajien vähimmäismäärä: <br />
