@@ -12,7 +12,8 @@ def get_announcement(announcement_id):
     sql = """SELECT announcements.id, announcements.title, announcements.description, announcements.vähimmäismäärä, announcements.user_id, users.username
              FROM announcements, users
              WHERE announcements.user_id = users.id AND announcements.id = ?"""
-    return db.query(sql, [announcement_id])[0]
+    result = db.query(sql, [announcement_id])
+    return result[0] if result else None
 
 def update_announcement(announcement_id, title, description, vähimmäismäärä):
     sql = """UPDATE announcements SET title = ?, description = ?, vähimmäismäärä = ?

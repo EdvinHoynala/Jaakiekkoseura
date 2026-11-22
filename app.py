@@ -28,6 +28,8 @@ def find_announcement():
 @app.route("/page/<int:announcement_id>")
 def show_announcement(announcement_id):
     announcement = announcements.get_announcement(announcement_id)
+    if not announcement:
+        abort(404)
     return render_template("show_announcement.html", announcement=announcement)
 
 @app.route("/new_announcement")
@@ -48,6 +50,8 @@ def create_announcement():
 @app.route("/edit_announcement/<int:announcement_id>")
 def edit_announcement(announcement_id):
     announcement = announcements.get_announcement(announcement_id)
+    if not announcement:
+        abort(404)
     if announcement["user_id"] != session["user_id"]:
         abort(403)
     return render_template("edit_announcement.html", announcement=announcement)
@@ -56,6 +60,8 @@ def edit_announcement(announcement_id):
 def update_announcement():
     announcement_id = request.form["announcement_id"]
     announcement = announcements.get_announcement(announcement_id)
+    if not announcement:
+        abort(404)
     if announcement["user_id"] != session["user_id"]:
         abort(403)
     title = request.form["title"]
@@ -70,6 +76,8 @@ def update_announcement():
 def remove_announcement(announcement_id):
     if request.method == "GET":
         announcement = announcements.get_announcement(announcement_id)
+        if not announcement:
+            abort(404)
         if announcement["user_id"] != session["user_id"]:
                 abort(403)
         return render_template("remove_announcement.html", announcement=announcement)
