@@ -9,6 +9,10 @@ import announcements
 app = Flask(__name__)
 app.secret_key = config.secret_key
 
+def check_login():
+    if "user_id" not in session:
+        abort(403)
+
 
 @app.route("/")
 def index():
@@ -34,10 +38,12 @@ def show_announcement(announcement_id):
 
 @app.route("/new_announcement")
 def new_item():
+    check_login()
     return render_template("new_announcement.html")
 
 @app.route("/create_announcement", methods=["POST"])
 def create_announcement():
+    check_login()
     title = request.form["title"]
     description = request.form["description"]
     vähimmäismäärä = request.form["vähimmäismäärä"]
@@ -49,6 +55,7 @@ def create_announcement():
 
 @app.route("/edit_announcement/<int:announcement_id>")
 def edit_announcement(announcement_id):
+    check_login()
     announcement = announcements.get_announcement(announcement_id)
     if not announcement:
         abort(404)
@@ -58,6 +65,7 @@ def edit_announcement(announcement_id):
 
 @app.route("/update_announcement", methods=["POST"])
 def update_announcement():
+    check_login()
     announcement_id = request.form["announcement_id"]
     announcement = announcements.get_announcement(announcement_id)
     if not announcement:
@@ -74,6 +82,7 @@ def update_announcement():
 
 @app.route("/remove_announcement/<int:announcement_id>", methods=["GET", "POST"])
 def remove_announcement(announcement_id):
+    check_login()
     if request.method == "GET":
         announcement = announcements.get_announcement(announcement_id)
         if not announcement:
@@ -135,5 +144,7 @@ def login():
 
 @app.route("/logout")
 def logout():
-    session.clear()
+    if "user_id" in session:
+     del session["user_id"]
+     del session["username"]
     return redirect("/")
