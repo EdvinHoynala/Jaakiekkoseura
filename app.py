@@ -5,6 +5,7 @@ import config
 import db
 import sqlite3
 import announcements
+import re
 
 app = Flask(__name__)
 app.secret_key = config.secret_key
@@ -45,8 +46,14 @@ def new_item():
 def create_announcement():
     check_login()
     title = request.form["title"]
+    if not title or len(title) > 50:
+        abort(403)
     description = request.form["description"]
+    if not description or len(description) > 1000:
+        abort(403)
     vähimmäismäärä = request.form["vähimmäismäärä"]
+    if not re.search("^([89]|1[0-9]|20)$", vähimmäismäärä):
+        abort(403)
     user_id = session["user_id"]
 
     announcements.add_announcement(title, description, vähimmäismäärä, user_id)

@@ -9,15 +9,15 @@
   <form action="/create_announcement" method="post">
     <p>
       Otsikko: <br />
-      <textarea rows="4" cols="20" name="title"></textarea>
+      <textarea rows="4" cols="20" name="title" maxlength="50" required></textarea>
     </p>
     <p>
       Kuvaus: <br />
-      <textarea rows="10" cols="60" name="description"></textarea>
+      <textarea rows="10" cols="60" name="description" maxlength="1000" required></textarea>
     </p>
     <p>
       Pelaajien vähimmäismäärä: <br />
-      <input type="text" name="vähimmäismäärä" size="2" maxlength="2" /> KPL
+      <input type="text" name="vähimmäismäärä" size="2" maxlength="2" pattern="[89]|1[0-9]|20" required/> KPL
     </p>
     </p>
     <input type="submit" value="Luo ilmoitus" />
