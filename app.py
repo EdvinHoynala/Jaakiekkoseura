@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import redirect, render_template, request, session
+from flask import abort, redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
 import config
 import db
@@ -48,11 +48,16 @@ def create_announcement():
 @app.route("/edit_announcement/<int:announcement_id>")
 def edit_announcement(announcement_id):
     announcement = announcements.get_announcement(announcement_id)
+    if announcement["user_id"] != session["user_id"]:
+        abort(403)
     return render_template("edit_announcement.html", announcement=announcement)
 
 @app.route("/update_announcement", methods=["POST"])
 def update_announcement():
     announcement_id = request.form["announcement_id"]
+    announcement = announcements.get_announcement(announcement_id)
+    if announcement["user_id"] != session["user_id"]:
+        abort(403)
     title = request.form["title"]
     description = request.form["description"]
     vähimmäismäärä = request.form["vähimmäismäärä"]
@@ -65,6 +70,8 @@ def update_announcement():
 def remove_announcement(announcement_id):
     if request.method == "GET":
         announcement = announcements.get_announcement(announcement_id)
+        if announcement["user_id"] != session["user_id"]:
+                abort(403)
         return render_template("remove_announcement.html", announcement=announcement)
 
     if request.method == "POST":
