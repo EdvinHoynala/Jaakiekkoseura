@@ -6,6 +6,7 @@ import db
 import sqlite3
 import announcements
 import re
+import users
 
 app = Flask(__name__)
 app.secret_key = config.secret_key
@@ -19,6 +20,14 @@ def check_login():
 def index():
     all_announcements = announcements.get_announcements()
     return render_template("index.html", announcements=all_announcements)
+
+@app.route("/user/<int:user_id>")
+def show_user(user_id):
+    user = users.get_user(user_id)
+    if not user:
+        abort(404)
+    user_announcements = announcements.get_user_announcements(user_id)
+    return render_template("show_users.html", user=user, announcements=user_announcements)
 
 @app.route("/find_announcement")
 def find_announcement():

@@ -8,6 +8,10 @@ def get_announcements():
     sql = "SELECT id, title FROM announcements ORDER BY id DESC"
     return db.query(sql)
 
+def get_user_announcements(user_id):
+    sql = "SELECT id, title FROM announcements WHERE user_id = ? ORDER BY id DESC"
+    return db.query(sql, [user_id])
+
 def get_announcement(announcement_id):
     sql = """SELECT announcements.id, announcements.title, announcements.description, announcements.vähimmäismäärä, announcements.user_id, users.username
              FROM announcements, users
